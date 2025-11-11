@@ -7,7 +7,7 @@ require 'vendor/autoload.php';
 $db_host = 'localhost';
 $db_user = 'chris';
 $db_pass = 'Admin123';
-$db_name = 'app_movil';
+$db_name = 'AppMovil';
 $smtp_user = 'soportepenkavc@gmail.com';
 $smtp_pass = 'iogt ecka hbix oqot';
 
@@ -41,7 +41,7 @@ if (mysqli_num_rows($result_check_user) > 0) {
             $mail->SMTPAuth   = true;
             $mail->Username   = $smtp_user;
             $mail->Password   = $smtp_pass;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTSL;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
             $mail->setFrom($smtp_user, 'Soporte PenkaApp');

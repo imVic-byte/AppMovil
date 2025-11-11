@@ -1,8 +1,48 @@
 <?php
-$cont=mysqli_connect('localhost','chris','Admin123','app_movil');
-$sql="select * from usuarios where email='".$_GET['email']."' and password='".$_GET['password']."'";
-$result=mysqli_query($cont,$sql);
-$num=mysqli_num_rows($result);
-$val=array('estado'=>$num==null?'0':$num);
-echo json_encode($val);
+header('Content-Type: application/json');
+$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'app_movil');
+
+$email = mysqli_real_escape_string($cont, $_GET['email']);
+$password_plano = mysqli_real_escape_string($cont, $_GET['password']);
+
+$sql = "SELECT id_usuario, nombre, apellido, rol, id_departamento, estado, password 
+        FROM usuarios 
+        WHERE email = '$email'";
+
+$result = mysqli_query($cont, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    $usuario = mysqli_fetch_assoc($result);
+    $hash_guardado = $usuario['password']; 
+    if (password_verify($password_plano, $hash_guardado)) {
+        
+        if ($usuario['estado'] == 'ACTIVO') {
+            
+            unset($usuario['password']); 
+            
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Login correcto.',
+                'usuario' => $usuario
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error', 
+                'message' => 'Tu cuenta se encuentra ' . $usuario['estado'] . '.'
+            ]);
+        }
+    } else {
+        echo json_encode([
+            'status' => 'error', 
+            'message' => 'Email o contraseña incorrectos.'
+        ]);
+    }
+} else {
+    echo json_encode([
+        'status' => 'error', 
+        'message' => 'Email o contraseña incorrectos.'
+    ]);
+}
+
+mysqli_close($cont);
 ?>

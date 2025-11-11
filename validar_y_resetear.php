@@ -3,7 +3,7 @@
 $db_host = 'localhost';
 $db_user = 'chris';
 $db_pass = 'Admin123';
-$db_name = 'app_movil';
+$db_name = 'AppMovil';
 
 
 header('Content-Type: application/json');

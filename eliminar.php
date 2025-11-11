@@ -1,5 +1,5 @@
 <?php
-$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'app_movil');
+$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'AppMovil');
 
 $id = $_GET['id'];
 
