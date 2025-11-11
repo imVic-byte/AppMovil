@@ -14,12 +14,12 @@ $id_usuario_log = null;
 $tipo_evento = 'ACCESO_RECHAZADO';
 $resultado_log = 'DENEGADO';
 
-$sql_check = "SELECT id_sensor, id_usuario, estado FROM SENSORES WHERE codigo_sensor = '$codigo_sensor'";
+$sql_check = "SELECT id, id_usuario, estado FROM SENSORES WHERE id = '$codigo_sensor'";
 $result_check = mysqli_query($cont, $sql_check);
 
 if (mysqli_num_rows($result_check) > 0) {
     $sensor = mysqli_fetch_assoc($result_check);
-    $id_sensor_log = $sensor['id_sensor'];
+    $id_sensor_log = $sensor['id'];
     $id_usuario_log = $sensor['id_usuario'];
     $estado_sensor = $sensor['estado'];
 
@@ -28,14 +28,14 @@ if (mysqli_num_rows($result_check) > 0) {
         $resultado_log = 'PERMITIDO';
         echo json_encode([
             'acceso' => 'PERMITIDO',
-            'id_sensor' => $id_sensor_log
+            'id' => $id_sensor_log
         ]);
     } else {
         $resultado_log = 'DENEGADO (Sensor ' . $estado_sensor . ')';
         echo json_encode([
             'acceso' => 'DENEGADO', 
             'motivo' => 'Sensor ' . $estado_sensor,
-            'id_sensor' => $id_sensor_log
+            'id' => $id_sensor_log
         ]);
     }
 
@@ -44,12 +44,12 @@ if (mysqli_num_rows($result_check) > 0) {
     echo json_encode([
         'acceso' => 'DENEGADO',
         'motivo' => 'Sensor no registrado',
-        'id_sensor' => null
+        'id' => null
     ]);
 }
 
 $fecha_hora = date('Y-m-d H:i:s');
-$sql_evento = "INSERT INTO EVENTOS_ACCESO (id_sensor, id_usuario, tipo_evento, fecha_hora, resultado) 
+$sql_evento = "INSERT INTO auditoria (id_sensor, id_usuario, tipo_uso, fecha_hora, autorizado) 
                VALUES ('$id_sensor_log', '$id_usuario_log', '$tipo_evento', '$fecha_hora', '$resultado_log')";
 
 mysqli_query($cont, $sql_evento);
