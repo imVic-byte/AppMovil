@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'app_movil');
+$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'AppMovil');
 
 if (!isset($_GET['id_departamento'])) {
     echo json_encode(['status' => 'error', 'message' => 'Se requiere un id_departamento.']);

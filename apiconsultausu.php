@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'app_movil');
+$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'AppMovil');
 
 $email = mysqli_real_escape_string($cont, $_GET['email']);
 $password_plano = mysqli_real_escape_string($cont, $_GET['password']);

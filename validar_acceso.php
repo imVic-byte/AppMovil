@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'app_movil');
+$cont = mysqli_connect('localhost', 'chris', 'Admin123', 'AppMovil');
 
 if (!$cont) {
     echo json_encode(['acceso' => 'DENEGADO', 'motivo' => 'Error de BD']);
