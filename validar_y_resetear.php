@@ -24,7 +24,7 @@ $codigo = mysqli_real_escape_string($conexion, $_GET['codigo']);
 $password = mysqli_real_escape_string($conexion, $_GET['password']);
 $current_time = time();
 
-$sql_check = "SELECT * FROM password_resets WHERE email = '$email' AND token = '$codigo'";
+$sql_check = "SELECT * FROM password_resets WHERE email = '$email' AND token = '$codigo' AND estado = 'NO USADO'";
 $result = mysqli_query($conexion, $sql_check);
 
 if (mysqli_num_rows($result) > 0) {

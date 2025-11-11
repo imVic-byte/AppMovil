@@ -9,7 +9,7 @@ if (!isset($_GET['id_departamento'])) {
 
 $id_departamento = mysqli_real_escape_string($cont, $_GET['id_departamento']);
 
-$sql = "SELECT id_usuario, nombre, apellido, email, telefono, rol, estado 
+$sql = "SELECT id_usuario, nombre, apellido, email, telefono, privilegios, estado 
         FROM usuarios 
         WHERE id_departamento = '$id_departamento'";
 
