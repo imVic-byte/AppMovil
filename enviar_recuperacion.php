@@ -12,7 +12,7 @@ $db_name = 'AppMovil';
 
 $smtp_user = 'soportepenkavc@gmail.com'; 
 $smtp_pass = 'iogt ecka hbix oqot';
-$reset_page_url = 'http://18.211.13.143/reset_password.php'; 
+$reset_page_url = 'http://3.208.0.144/reset_password.php'; 
 
 $conexion = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
@@ -36,7 +36,7 @@ if (mysqli_num_rows($result_check_user) > 0) {
     $token = bin2hex(random_bytes(32));
     $expires = time() + 3600; 
 
-    $sql_insert_token = "INSERT INTO password_resets (email, token, expires_at) VALUES ('$email', '$token', '$expires')";
+    $sql_insert_token = "INSERT INTO password_resets (email, token, expires_at, estado) VALUES ('$email', '$token', '$expires','NO USADO')";
     
     if (mysqli_query($conexion, $sql_insert_token)) {
         $mail = new PHPMailer(true);
