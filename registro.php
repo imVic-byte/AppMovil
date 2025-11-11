@@ -29,7 +29,7 @@ $result_dept = mysqli_query($cont, $sql_check_dept);
 $row_dept = mysqli_fetch_assoc($result_dept);
 $rol_usuario = ($row_dept['total'] == 0) ? 'administrador' : 'operador';
 
-$sql_insert = "INSERT INTO usuarios (nombre, apellido, email, telefono, password, id_departamento, rol, estado) 
+$sql_insert = "INSERT INTO usuarios (nombre, apellido, email, telefono, password_hash, id_departamento, privilegios, estado) 
                VALUES ('$nombre', '$apellido', '$email', '$telefono', '$clave_hash', '$id_departamento', '$rol_usuario', '$estado_inicial')";
 
 if (mysqli_query($cont, $sql_insert)) {
