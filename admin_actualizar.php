@@ -10,13 +10,13 @@ if (!$cont) {
 $id_usuario_target = mysqli_real_escape_string($cont, $_GET['id_usuario']);
 $nuevo_estado = mysqli_real_escape_string($cont, $_GET['nuevo_estado']);
 
-$estados_validos = ['ACTIVO', 'INACTIVO', 'BLOQUEADO'];
+$estados_validos = ['activo', 'inactivo', 'bloqueado'];
 if (!in_array($nuevo_estado, $estados_validos)) {
     echo json_encode(['status' => 'error', 'message' => 'Estado no válido.']);
     exit();
 }
 
-$sql = "UPDATE usuarios SET estado = '$nuevo_estado' WHERE id_usuario = '$id_usuario_target'";
+$sql = "UPDATE usuarios SET estado = '$nuevo_estado' WHERE id = '$id_usuario_target'";
 
 if (mysqli_query($cont, $sql)) {
     if (mysqli_affected_rows($cont) > 0) {
