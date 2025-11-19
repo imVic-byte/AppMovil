@@ -3,9 +3,9 @@ header('Content-Type: application/json');
 $cont = mysqli_connect('localhost', 'chris', 'Admin123', 'AppMovil');
 
 $email = mysqli_real_escape_string($cont, $_GET['email']);
-$password_plano = mysqli_real_escape_string($cont, $_GET['password']);
+$password_plano = mysqli_real_escape_string($cont, $_GET['password_hash']);
 
-$sql = "SELECT id_usuario, nombre, apellido, rol, id_departamento, estado, password 
+$sql = "SELECT id, nombre, apellido, privilegios, id_departamento, estado, password_hash
         FROM usuarios 
         WHERE email = '$email'";
 
@@ -13,12 +13,12 @@ $result = mysqli_query($cont, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     $usuario = mysqli_fetch_assoc($result);
-    $hash_guardado = $usuario['password']; 
+    $hash_guardado = $usuario['password_hash']; 
     if (password_verify($password_plano, $hash_guardado)) {
         
         if ($usuario['estado'] == 'ACTIVO') {
             
-            unset($usuario['password']); 
+            unset($usuario['password_hash']); 
             
             echo json_encode([
                 'status' => 'success',

@@ -12,8 +12,9 @@ $apellido = mysqli_real_escape_string($cont, $_GET['lastname']);
 $email = mysqli_real_escape_string($cont, $_GET['email']);
 $telefono = mysqli_real_escape_string($cont, $_GET['phone']);
 $id_departamento = mysqli_real_escape_string($cont, $_GET['id_departamento']);
-$estado_inicial = 'ACTIVO';
+$estado_inicial = 'activo';
 $clave_plana = mysqli_real_escape_string($cont, $_GET['password']);
+$rut = mysqli_real_escape_string($cont, $_GET['rut']);
 $clave_hash = password_hash($clave_plana, PASSWORD_DEFAULT);
 
 $sql_check_email = "SELECT email FROM usuarios WHERE email = '$email'";
@@ -29,8 +30,8 @@ $result_dept = mysqli_query($cont, $sql_check_dept);
 $row_dept = mysqli_fetch_assoc($result_dept);
 $rol_usuario = ($row_dept['total'] == 0) ? 'administrador' : 'operador';
 
-$sql_insert = "INSERT INTO usuarios (nombre, apellido, email, telefono, password_hash, id_departamento, privilegios, estado) 
-               VALUES ('$nombre', '$apellido', '$email', '$telefono', '$clave_hash', '$id_departamento', '$rol_usuario', '$estado_inicial')";
+$sql_insert = "INSERT INTO usuarios (nombre, apellido, email, telefono, password_hash, id_departamento, privilegios, estado, rut) 
+               VALUES ('$nombre', '$apellido', '$email', '$telefono', '$clave_hash', '$id_departamento', '$rol_usuario', '$estado_inicial', '$rut')";
 
 if (mysqli_query($cont, $sql_insert)) {
     echo json_encode(['status' => 'success', 'message' => 'Usuario registrado correctamente como ' . $rol_usuario]);
