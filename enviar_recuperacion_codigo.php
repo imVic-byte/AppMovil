@@ -26,7 +26,7 @@ if (!isset($_GET['email'])) {
 $email = mysqli_real_escape_string($conexion, $_GET['email']);
 $sql_check_user = "SELECT id FROM usuarios WHERE email = '$email'";
 $result_check_user = mysqli_query($conexion, $sql_check_user);
-
+    
 if (mysqli_num_rows($result_check_user) > 0) {
     $codigo_numerico = rand(10000, 99999);
     $expires = time() + 60;
